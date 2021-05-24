@@ -1,6 +1,6 @@
 # Simple time management system. 
 
-#### The system will run on bootstrap, Laravel 8, javascript. 
+#### The system will run on bootstrap, Laravel 8, javascript and mysql. 
 
 - The overall objective of this system is to help a user tracke their tasks . 
 - A user will register to the system and be able to create daily tasks .
