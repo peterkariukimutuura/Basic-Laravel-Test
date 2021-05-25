@@ -1,8 +1,8 @@
-# Simple time management system. 
+# Simple task management system. 
 
 #### The system will run on bootstrap, Laravel 8, javascript and mysql. 
 
-- The overall objective of this system is to help a user tracke their tasks . 
+- The overall objective of this system is to help a user track and mamnge their tasks . 
 - A user will register to the system and be able to create daily tasks .
 - The user will provide the following information during registration: username, email, password, gender, phone number, date of birth.
 - The system should send an email notification once a user is successfully registered.
