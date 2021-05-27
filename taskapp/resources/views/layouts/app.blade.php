@@ -6,6 +6,7 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Taskapp</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+        <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
     </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -31,7 +32,7 @@
             </ul>
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a href="register" class="nav-link">Sign Up</a>
+                    <a href="{{ route('register') }}" class="nav-link">Sign Up</a>
                 </li>
                 <li class="nav-item">
                     <a href="login" class="nav-link">Sign In</a>
