@@ -29,7 +29,11 @@
             @error('password')
                 <p class="text-danger">{{ $message }}</p>
             @enderror
-        </div> 
+          </div>
+          <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="remember" name="remember">
+            <label class="form-check-label" for="remember">Remember me</label>
+          </div> 
           <br>
           <button class="btn btn-primary col-sm-6" type="submit">Login</button>
       </form>
