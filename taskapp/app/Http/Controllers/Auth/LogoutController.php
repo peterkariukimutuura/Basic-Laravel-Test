@@ -10,6 +10,6 @@ class LogoutController extends Controller
     public function bye() {
         auth()->logout();
 
-        return redirect()->route('taskapp');
+        return redirect('/');
     }
 }
