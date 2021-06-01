@@ -21,7 +21,11 @@
                     <textarea class="form-control" id="description" 
                     name="description" rows="3"></textarea>
                 </div>
-              </div>
+
+                @error('description')
+                    <p class="text-danger">{{ $message }}</p>
+                @enderror
+            </div>
             <div class="form-group">
                 <div class="col-sm-8">
                     <label for="due_date">Due Date</label>
