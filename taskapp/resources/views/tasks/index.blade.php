@@ -19,7 +19,7 @@
                 <div class="col-sm-8">
                     <label for="description">Task Description</label>
                     <textarea class="form-control" id="description" 
-                    name="description" rows="3"></textarea>
+                    name="description" rows="3">{{ old('description') }}</textarea>
                 </div>
 
                 @error('description')
@@ -28,21 +28,43 @@
             </div>
             <div class="form-group">
                 <div class="col-sm-8">
-                    <label for="due_date">Due Date</label>
-                    <input type="date" id="due_date" name="due_date" class="form-control input-sm" 
-                    value="{{ old('due_date') }}">
+                    <label for="start_date">Start Date</label>
+                    <input type="date" id="start_date" name="start_date" class="form-control input-sm" 
+                    value="{{ old('start_date') }}">
                 </div>
 
-                @error('due_date')
+                @error('start_date')
                     <p class="text-danger">{{ $message }}</p>
                 @enderror
             </div>
-            <div class="form-check">
-                <input type="checkbox" class="form-check-input" id="completed" name="completed">
-                <label class="form-check-label" for="completed">Task Complete</label>
+            <div class="form-group">
+                <div class="col-sm-8">
+                    <label for="end_date">End Date</label>
+                    <input type="date" id="end_date" name="end_date" class="form-control input-sm" 
+                    value="{{ old('end_date') }}">
+                </div>
+
+                @error('end_date')
+                    <p class="text-danger">{{ $message }}</p>
+                @enderror
+            </div>
+            <div class="form-group">
+                <div class="col-sm-8">
+                    <label for="completed">Task Complete?</label>
+                    <select class="form-control" id="completed" name="completed">
+                        <option value="">--Select--</option>                        
+                        <option value="yes">Yes</option>
+                        <option value="no">No</option>
+                    </select>
+                </div>
+
+                @error('completed')
+                    <p class="text-danger">{{ $message }}</p>
+                @enderror
               </div>
             <br>
             <button class="btn btn-primary" type="submit">Register Task</button>
+            <a href="{{ route('show') }}" class="btn btn-success" >View your tasks</a>
         </form>    
     </div>
     

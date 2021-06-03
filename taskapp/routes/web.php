@@ -38,3 +38,5 @@ Route::get('/posts', function () {
 
 Route::get('/tasks', [TaskController::class, 'index'])->name('tasks');
 Route::post('/tasks', [TaskController::class, 'store']);
+Route::get('/tasks/show', [TaskController::class, 'show'])->name('show');
+Route::delete('tasks/show/{task}', [TaskController::class, 'destroy'])->name('tasks.show.destroy');
