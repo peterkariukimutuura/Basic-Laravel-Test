@@ -2,8 +2,9 @@
 
 @section('content')
     <div class="container">
+        @include('inc.messages')
         <h1 class="display-4">Your Tasks</h3>
-        <a href="{{ route('tasks') }}" class="btn btn-primary">Go Back / Add Another Task</a>
+        <a href="{{ route('tasks.index') }}" class="btn btn-primary">Go Back / Add Another Task</a>
         @if ($tasks->count())
             <table class="table">
                 <thead>
@@ -17,22 +18,31 @@
                     </tr>
                 </thead>
                 <tbody>
-            @foreach ($tasks as $task)
-                        <tr>
-                            <td>{{ $task->title }}</td>
-                            <td>{{ $task->description }}</td>
-                            <td>{{ $task->start_date }}</td>
-                            <td>{{ $task->end_date }}</td>
-                            <td>{{ $task->completed}}</td>
-                            <td>
-                                <form action="{{ route('tasks.show.destroy', $task) }}" method="post">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-warning">Delete</button>
-                                </form>
-                            </td>
-                        </tr>
-            @endforeach
+                    @foreach ($tasks as $task)
+                        @if($task->ownedBy(auth()->user()))
+                            <tr>
+                                <td>{{ $task->title }}</td>
+                                <td>{{ $task->description }}</td>
+                                <td>{{ $task->start_date }}</td>
+                                <td>{{ $task->end_date }}</td>
+                                <td>{{ $task->completed}}</td>
+                                <td>
+                                    <div class="btn-toolbar">
+                                        <div class="btn-group mr-2">
+                                            <a href="{{ route('tasks.edit', $task) }}" class="btn btn-warning">Edit</a>
+                                        </div>
+                                        <div class="btn-group">
+                                            <form action="{{ route('tasks.destroy', $task->id) }}" method="post">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger">Delete</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        @endif
+                    @endforeach
                 </tbody>
             </table>
         @else

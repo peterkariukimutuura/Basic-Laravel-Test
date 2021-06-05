@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Models\User;
+use App\Mail\UserRegistered;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class RegisterController extends Controller
 {
@@ -41,6 +43,10 @@ class RegisterController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
+        // $user = auth()->user();
+
+        Mail::to('67ed938713-048638@inbox.mailtrap.io')->send(new UserRegistered(auth()->user()));
+
         // sign user in
         auth()->attempt([
             'email' => $request->email,
@@ -48,6 +54,6 @@ class RegisterController extends Controller
         ]);
 
         // redirect
-        return redirect()->route('tasks');
+        return redirect()->route('tasks.index');
     }
 }

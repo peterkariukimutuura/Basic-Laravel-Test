@@ -36,7 +36,15 @@ Route::get('/posts', function () {
     return view('posts.index');
 });
 
+Route::resource('tasks', TaskController::class);
+
+Route::get('/tasks/show', [TaskController::class, 'show'])->name('tasks.show');
+
+/*
 Route::get('/tasks', [TaskController::class, 'index'])->name('tasks');
 Route::post('/tasks', [TaskController::class, 'store']);
 Route::get('/tasks/show', [TaskController::class, 'show'])->name('show');
+Route::get('/tasks/edit/{task}', [TaskController::class, 'edit'])->name('tasks.edit');
+Route::put('/tasks/edit', [TaskController::class, 'update'])->name('tasks.edit.update');
 Route::delete('tasks/show/{task}', [TaskController::class, 'destroy'])->name('tasks.show.destroy');
+*/
