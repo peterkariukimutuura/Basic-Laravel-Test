@@ -43,15 +43,15 @@ class RegisterController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        // $user = auth()->user();
-
-        Mail::to('67ed938713-048638@inbox.mailtrap.io')->send(new UserRegistered(auth()->user()));
-
         // sign user in
         auth()->attempt([
             'email' => $request->email,
             'password' => $request->password,
         ]);
+
+        $user = auth()->user();
+        
+        Mail::to($user->email)->send(new UserRegistered(auth()->user()));
 
         // redirect
         return redirect()->route('tasks.index');
