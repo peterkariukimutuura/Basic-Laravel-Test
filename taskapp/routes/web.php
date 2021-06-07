@@ -1,11 +1,14 @@
 <?php
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TaskController;
+use Illuminate\Support\Facades\Password;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\PasswordResetController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,9 +35,15 @@ Route::get('/', function () {
     return view('taskapp');
 });
 
+Route::get('/forgot-password', [PasswordResetController::class, 'index'])->name('password.request');
+Route::post('/forgot-password', [PasswordResetController::class, 'sendResetLink'])->name('password.email');
+Route::get('/reset-password/{token}', [PasswordResetController::class, 'reset'])->name('password.reset');
+Route::post('/reset-password', [PasswordResetController::class, 'update'])->name('password.update');
+
 Route::get('/posts', function () {
     return view('posts.index');
 });
 
-Route::get('/tasks', [TaskController::class, 'index'])->name('tasks');
-Route::post('/tasks', [TaskController::class, 'store']);
+Route::resource('tasks', TaskController::class);
+
+Route::get('/tasks/show', [TaskController::class, 'show'])->name('tasks.show');

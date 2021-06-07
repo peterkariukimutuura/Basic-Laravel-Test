@@ -18,8 +18,9 @@ class CreateTasksTable extends Migration
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('title');
             $table->text('description');
-            $table->date('due_date');
-            $table->boolean('completed');
+            $table->date('start_date');
+            $table->date('end_date');
+            $table->string('completed');
             $table->timestamps();
         });
     }

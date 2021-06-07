@@ -2,6 +2,7 @@
 
 @section('content')
     <div class="container">
+      @include('inc.messages')
       <h1 class="display-6">Login Here</h1>
       @if (session('status'))
           <div class="alert alert-danger col-sm-6">
@@ -36,6 +37,8 @@
           </div> 
           <br>
           <button class="btn btn-primary col-sm-6" type="submit">Login</button>
+          <br>
+          <a href="{{ route('password.request') }}">Forgot Password? Click to Reset</a>
       </form>
           
     </div>

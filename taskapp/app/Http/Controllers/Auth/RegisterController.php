@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Models\User;
+use App\Mail\UserRegistered;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class RegisterController extends Controller
 {
@@ -47,7 +49,11 @@ class RegisterController extends Controller
             'password' => $request->password,
         ]);
 
+        $user = auth()->user();
+        
+        Mail::to($user->email)->send(new UserRegistered(auth()->user()));
+
         // redirect
-        return redirect()->route('dashboard');
+        return redirect()->route('tasks.index');
     }
 }
