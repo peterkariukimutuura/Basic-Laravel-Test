@@ -129,5 +129,11 @@ class TaskController extends Controller
         $task->delete();
 
         return back()->with('success', 'Task Removed');
+        
+        /*
+        return response()->json([
+            'message' => 'Task Removed'
+        ]);
+        */
     }
 }
