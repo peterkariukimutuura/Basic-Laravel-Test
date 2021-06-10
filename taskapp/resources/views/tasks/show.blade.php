@@ -20,7 +20,7 @@
                 <tbody>
                     @foreach ($tasks as $task)
                         @if($task->ownedBy(auth()->user()))
-                            <tr>
+                            <tr id="task-id{{ $task->id }}">
                                 <td>{{ $task->title }}</td>
                                 <td>{{ $task->description }}</td>
                                 <td>{{ $task->start_date }}</td>
@@ -35,8 +35,8 @@
                                             <form action="{{ route('tasks.destroy', $task->id) }}" method="post">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-danger" id="deleteTask"
-                                                 data-id="{{ $task->id }}">Delete</button>
+                                                <button type="submit" class="btn btn-danger" 
+                                                onclick="deleteTask({{ $task->id }})">Delete</button>
                                             </form>
                                         </div>
                                     </div>
@@ -53,41 +53,21 @@
 @endsection
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <script>
-    $(document).ready(function () {
-
-        $("body").on("click","#deleteTask",function(e){
-
-            if(!confirm("Do you really want to do this?")) {
-                return false;
-            }
-
-            e.preventDefault();
-            var id = $(this).data("id");
-            var token = $("meta[name='csrf-token']").attr("content");
-            var url = e.target;
-
-            $.ajax(
-                {
-                    url: url.href,
-                    type: 'DELETE',
-                    data: {
-                    _token: token,
-                        id: id
+    function deleteTask(id)
+    {
+        if(confirm('Do you really want to delete this task?'))
+        {
+            $.ajax({
+                url :'tasks/'+id,
+                type : DELETE,
+                data : {
+                    _token : $("input[name=token]").val()
                 },
-                success: function (response){
-
-                    $("#success").html(response.message)
-
-                    Swal.fire(
-                        'Remind!',
-                        'Task removed',
-                        'success'
-                    )
+                success : function(response)
+                {
+                    $("#task-id"+id).remove();
                 }
             });
-                return false;
-        });
-    
-
-    });
+        }
+    }
 </script>
